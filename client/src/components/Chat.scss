@@ -1,0 +1,102 @@
+.chat{
+    width: 100%;
+
+    .chat-content{
+        display: flex;
+        position: relative;
+    }
+}
+
+.messeges{
+    width: 80%;
+    height: 600px;
+    margin-bottom: 15px;
+    position: relative;
+    @media screen and (max-width: 800px){
+        width: 100%;
+    }
+    &__margin{
+       margin: 8px;
+    }
+    
+    &__list{
+        box-sizing: border-box;
+        overflow:auto;
+        height: 560px;
+        width: 100%;
+        padding: 30px 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        @media screen and (max-width: 1000px){
+            padding: 20px;
+        }
+    }
+}
+
+.input-send{
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    @media screen and (max-width: 1000px){
+       
+       width: 100%;
+    }
+
+    .input-send__centr{
+        width: 99%;
+        margin: 0 auto;
+    }
+
+    input{
+        width: 90%;
+        height: 40px;
+        font-size: 1.3rem;
+        padding: 3px;
+        outline:none;
+        box-sizing: border-box;
+        border: 1px solid gray;
+        @media screen and (max-width: 1000px){
+            height: 30px;
+            font-size: 1rem;
+         }
+    }
+    button{
+        width:10%;
+        height: 40px;
+        font-size: 1.3rem;
+        padding: 3px;
+        background-color: rgb(239, 120, 32);
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        // position: absolute;
+        right: 0;
+        @media screen and (max-width: 1200px){
+            font-size: 1.2rem;
+        }
+        @media screen and (max-width: 1000px){
+            height: 30px;
+            font-size: 1rem;
+            width: 10%;
+        }
+    }
+    button::after{
+        content: 'отправить';
+        @media screen and (max-width: 1000px){
+          content: 'ok';
+        }
+    }
+    button:hover{
+        background-color: rgb(193, 98, 25);;
+        color: rgb(197, 195, 195);
+    }
+    button:disabled{
+        background-color: rgb(72, 47, 28);
+        color: rgb(66, 66, 66);
+        cursor:auto;
+    }
+}
+
+
+

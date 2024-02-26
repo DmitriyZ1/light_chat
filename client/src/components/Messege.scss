@@ -1,0 +1,33 @@
+.messege{
+    list-style-type:none;
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(75, 75, 75);
+    
+    &__user{
+        display: flex;
+    }
+
+    &__name{
+        font-size: 1.2rem;
+        @media screen and (max-width: 1000px){
+            font-size: 1rem;       
+        }
+    }   
+
+    &__time{
+        font-size: 1.3rem;
+        color: rgb(193, 192, 192);
+        margin-left: 20px;
+        @media screen and (max-width: 1000px){
+            font-size: 1rem;       
+        }
+    }
+
+    &__text{
+        font-size: 1.1rem;
+        color: rgb(152, 152, 152);
+        @media screen and (max-width: 1000px){
+            font-size: 0.9rem;       
+        }
+    }
+}
