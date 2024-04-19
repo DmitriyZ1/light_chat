@@ -27,6 +27,7 @@ export default (env: EnvVar) => {
         plugins: [
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, 'public', 'index.html'),
+                favicon: path.resolve(__dirname, 'public', 'chat.ico')
             }),
             isProd && new MiniCssExtractPlugin({
                 filename: 'css/[name].[contenthash:8].css',

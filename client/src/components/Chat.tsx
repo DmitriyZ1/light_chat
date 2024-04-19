@@ -1,26 +1,21 @@
 import Message from "./Messege"
-import Info from "./Info"
-import { useState, useEffect, useRef } from "react"
+import Header from "./Header"
+import { useState, useEffect, useRef, useContext } from "react"
+import { MainContext } from "@/context/context"
 import { useInputText } from "@/myhooks/impHook"
 import './Chat.scss'
 import { Users } from "./Users"
-import { UserType, ChatType } from "@/types/type"
+import { ContextType } from "@/types/type"
 
 
-interface PropsTypes {
-    messeges: ChatType[],
-    users: UserType[],
-    pushMessage: (a: string) => void,
-    info: string[]
-}
-
-export default function Chat({ messeges, users, pushMessage, info }: PropsTypes) {
-
+export default function Chat() {
     const { inpState, changeValue, setInpState } = useInputText()
     const [isNotVoid, setIsNotVoid] = useState<boolean>(true)
     const refInput = useRef<HTMLInputElement>(null);
     const refList = useRef<HTMLDivElement>(null)
     const refItems = useRef<HTMLUListElement>(null)
+    const context:ContextType = useContext(MainContext)
+    const {messeges, pushMessage } = context
 
     useEffect(() => {
         if (inpState.length < 1) {
@@ -55,9 +50,9 @@ export default function Chat({ messeges, users, pushMessage, info }: PropsTypes)
 
     return (
         <div className="chat">
-            <Info info={info} />
+            <Header />
             <div className="chat-content">
-                <Users usersList={users} />
+                <Users />
                 <div className="messeges">
                     <div className="messeges__margin">
                         <div className="messeges__list" ref={refList}>

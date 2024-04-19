@@ -1,13 +1,17 @@
-import { useState, useRef, useEffect } from "react"
-import { useInputText } from "@/myhooks/impHook";
+import { useState, useRef, useEffect, useContext } from "react"
+import { useInputText } from "@/myhooks/impHook"
 import './Auth.scss'
+import { randomColor } from "@/func/random"
+import { MainContext } from "@/context/context"
+import { ContextType } from "@/types/type"
 
-
-export default function Auth({ connectSocket }: { connectSocket: (userName: string) => void }) {
+export default function Auth() {
 
     const inputName = useRef<HTMLInputElement>(null)
     const [isName, setIsName] = useState<boolean>(false)
     const {inpState, changeValue} = useInputText()
+    const context:ContextType = useContext(MainContext);
+    const {connectSocket} = context
 
     useEffect(() => {
         if(inpState.length < 1){
@@ -20,11 +24,10 @@ export default function Auth({ connectSocket }: { connectSocket: (userName: stri
     const keyPress = (event:React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter"){
             if(isName){
-                connectSocket(inputName.current.value)
+                connectSocket({name:inputName.current.value,  color: randomColor(), newConnect: true})
             }
         }
     } 
-
 
     return (
         <div className="auth">
@@ -37,7 +40,7 @@ export default function Auth({ connectSocket }: { connectSocket: (userName: stri
                         <input onKeyDown={keyPress} type="text" ref={inputName} value={inpState} onChange={changeValue} />
                     </div>
                     <div className="auth-form__button" >
-                        <button disabled={!isName} onClick={() => { connectSocket(inputName.current.value) }}> далее </button>
+                        <button disabled={!isName} onClick={() => { connectSocket({name:inputName.current.value, color: randomColor(), newConnect: true}) }}> далее </button>
                     </div>
                 </div>
             </div>
