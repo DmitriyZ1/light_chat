@@ -3,6 +3,8 @@ import { randomColor, getTime } from './func';
 import { CORS, countMessagesHistory, PORT } from './options';
 import { UserData, ChatType } from './types/types';
 
+const port:any = process.env.PORT || PORT
+
 const io = new Server(
     {
         cors: {
@@ -26,7 +28,6 @@ io.use((socket, next) => {
 
 
 io.on("connection", (socket) => {
-    
     let arrUsers: UserData[] = []
     let countUsers = 0;
     io.of("/").sockets.forEach((item) => {
@@ -50,13 +51,6 @@ io.on("connection", (socket) => {
 
     socket.on("user messege", (e) => {
         const itemMesseg: ChatType = { name: socket.data.username, messege: e, namecolor: socket.data.namecolor, time: getTime() };
-        
-        // const l:any = [];
-        // io.of("/").sockets.forEach((item) => {
-        //    l.push(item.data.username)
-        // })
-        // console.log(l);
-
         io.emit("messege", itemMesseg)
         history.push(itemMesseg)
         if (history.length > countMessagesHistory) {
@@ -74,7 +68,6 @@ io.on("connection", (socket) => {
         if (countConnections === 0) {
             arrUsers = arrUsers.filter(item => item.name !== socket.data.username && item.namecolor !== socket.data.colorId)
             io.emit("update users", arrUsers)
-            
             socket.broadcast.emit("user disconnected",{
                 userID: socket.id,
                 username: socket.data.username,
@@ -84,7 +77,7 @@ io.on("connection", (socket) => {
     })
 })
 
-io.listen(PORT);
+io.listen(port);
 
 
 
